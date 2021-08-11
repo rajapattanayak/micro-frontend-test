@@ -5,6 +5,7 @@ import { StylesProvider } from "@material-ui/core";
 import Landing from "./components/Landing";
 import Pricing from "./components/Pricing";
 
+//Marketing
 export default () => {
   return (
     <div>
