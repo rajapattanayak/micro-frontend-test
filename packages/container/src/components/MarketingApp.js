@@ -4,7 +4,7 @@ import React, { useRef, useEffect } from "react";
 export default () => {
   const ref = useRef(null);
   
-  // Load only once.
+  // Load only once
   useEffect(() => {
     mount(ref.current)
   })
