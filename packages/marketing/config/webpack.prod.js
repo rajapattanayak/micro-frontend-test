@@ -7,7 +7,7 @@ const prodConfig = {
   mode: "production",
   output: {
     filename: "[name].[contenthash].js",
-    publicPath: '/marketing/latest/'
+    publicPath: "/marketing/latest/",
   },
   plugins: [
     new ModuleFederationPlugin({
@@ -17,8 +17,8 @@ const prodConfig = {
         "./MarketingApp": "./src/bootstrap",
       },
       shared: packageJson.dependencies,
-    })
-  ]
+    }),
+  ],
 };
 
 module.exports = merge(commonConfig, prodConfig);
