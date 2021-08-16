@@ -3,11 +3,14 @@ import ReactDOM from "react-dom";
 import { createMemoryHistory, createBrowserHistory } from "history";
 import App from "./App";
 
-const mount = (el, { onNavigate, defaultHistory, initialPath }) => {
+const mount = (el, { onSignIn, onNavigate, defaultHistory, initialPath }) => {
   // if provided then use default history or else use memory history
   const history =
     defaultHistory ||
     createMemoryHistory({
+      //memory history thinks that we are at root "/", we need to tell otherwise
+      // i.e we are serving from /auth/login or /auth/signin
+      // this comes from parentapp (container) navigation
       initialEntries: [initialPath],
     });
 
@@ -15,7 +18,7 @@ const mount = (el, { onNavigate, defaultHistory, initialPath }) => {
     history.listen(onNavigate);
   }
 
-  ReactDOM.render(<App history={history} />, el);
+  ReactDOM.render(<App onSignIn={onSignIn} history={history} />, el);
 
   return {
     onParentNavigate({ pathname: nextPathname }) {
@@ -29,7 +32,7 @@ const mount = (el, { onNavigate, defaultHistory, initialPath }) => {
 };
 
 if (process.env.NODE_ENV === "development") {
-  const devRoot = document.querySelector("#_marketing-dev-root");
+  const devRoot = document.querySelector("#_auth-dev-root");
 
   if (devRoot) {
     // In isolation use browser history
